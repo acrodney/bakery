@@ -1,0 +1,1595 @@
+/* ==========================================================================
+   Mama Tunde's Bakery - Modern Artisanal Mobile-First Stylesheet
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Color Palette */
+  --color-primary: #8a3b05;
+  --color-primary-dark: #5c2401;
+  --color-primary-light: #b85d1b;
+  --color-accent: #d97706;
+  --color-accent-gold: #f59e0b;
+  --color-cream: #fefbf6;
+  --color-cream-subtle: #fbf5ec;
+  --color-card-bg: #ffffff;
+  --color-border: #eddccb;
+  --color-border-light: #f5ece2;
+  --color-text-main: #2b1d14;
+  --color-text-muted: #745f52;
+  --color-text-light: #9c887b;
+  
+  /* Telegram Brand Colors */
+  --color-telegram: #229ed9;
+  --color-telegram-dark: #1b85b8;
+  --color-telegram-glow: rgba(34, 158, 217, 0.25);
+  
+  /* Status Colors */
+  --color-open-green: #15803d;
+  --color-open-bg: #dcfce7;
+  --color-closed-red: #b91c1c;
+  --color-closed-bg: #fee2e2;
+
+  /* Typography */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  /* Layout & Elevations */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 2px 6px rgba(43, 29, 20, 0.04);
+  --shadow-md: 0 8px 24px rgba(69, 36, 1, 0.08);
+  --shadow-lg: 0 16px 36px rgba(69, 36, 1, 0.12);
+  --shadow-telegram: 0 8px 20px rgba(34, 158, 217, 0.35);
+
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base & Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-text-main);
+  line-height: 1.6;
+  font-size: 16px;
+  padding-bottom: 74px; /* Space for mobile bottom bar */
+  overflow-x: hidden;
+}
+
+@media (min-width: 900px) {
+  body {
+    padding-bottom: 0;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(254, 251, 246, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--color-border-light);
+  transition: box-shadow var(--transition-fast);
+}
+
+.site-header.scrolled {
+  box-shadow: var(--shadow-sm);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  box-shadow: 0 4px 12px rgba(138, 59, 5, 0.25);
+  flex-shrink: 0;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.brand-tagline {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* Desktop Nav Links */
+.nav-menu {
+  display: none;
+  list-style: none;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-link {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--color-primary);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: 2px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Telegram CTA button */
+.btn-telegram-header {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--color-telegram), var(--color-telegram-dark));
+  color: #ffffff;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: var(--shadow-telegram);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.btn-telegram-header:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(34, 158, 217, 0.45);
+  color: #ffffff;
+}
+
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  background: var(--color-cream-subtle);
+  border: 1px solid var(--color-border);
+  padding: 8px;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary-dark);
+  border-radius: 2px;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.menu-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (min-width: 900px) {
+  .nav-menu {
+    display: flex;
+  }
+  .btn-telegram-header {
+    display: inline-flex;
+  }
+  .menu-toggle {
+    display: none;
+  }
+}
+
+/* Mobile Slide-down Drawer */
+.mobile-nav-drawer {
+  display: none;
+  position: absolute;
+  top: 72px;
+  left: 0;
+  width: 100%;
+  background: var(--color-card-bg);
+  border-bottom: 2px solid var(--color-border);
+  box-shadow: var(--shadow-lg);
+  padding: 20px;
+  z-index: 99;
+}
+
+.mobile-nav-drawer.open {
+  display: block;
+  animation: slideDown 0.25s ease-out;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.mobile-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobile-nav-item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-text-main);
+  background: var(--color-cream);
+  border: 1px solid var(--color-border-light);
+}
+
+.mobile-nav-item a.active {
+  background: #fbf0e2;
+  color: var(--color-primary);
+  border-color: var(--color-primary-light);
+}
+
+.mobile-telegram-btn-drawer {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--color-telegram), var(--color-telegram-dark));
+  color: #ffffff;
+  padding: 14px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: var(--shadow-telegram);
+}
+
+/* ==========================================================================
+   Mobile Bottom Navigation Bar (Sticky Thumb-friendly)
+   ========================================================================== */
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 999;
+  padding: 0 6px;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.06);
+}
+
+@media (min-width: 900px) {
+  .mobile-bottom-nav {
+    display: none;
+  }
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  gap: 3px;
+  flex: 1;
+  padding: 6px 0;
+}
+
+.bottom-nav-item svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 2;
+  transition: transform var(--transition-fast);
+}
+
+.bottom-nav-item.active {
+  color: var(--color-primary);
+}
+
+.bottom-nav-item.active svg {
+  transform: scale(1.1);
+  stroke: var(--color-primary);
+}
+
+.bottom-nav-telegram {
+  background: linear-gradient(135deg, var(--color-telegram), var(--color-telegram-dark));
+  color: #ffffff !important;
+  border-radius: 30px;
+  padding: 6px 14px;
+  margin: 0 4px;
+  box-shadow: 0 4px 12px rgba(34, 158, 217, 0.4);
+}
+
+.bottom-nav-telegram svg {
+  stroke: #ffffff;
+}
+
+/* ==========================================================================
+   Live Status Badge (Open / Closed)
+   ========================================================================== */
+.live-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: all var(--transition-fast);
+}
+
+.live-status-badge.open {
+  background-color: var(--color-open-bg);
+  color: var(--color-open-green);
+  border: 1px solid #bbf7d0;
+}
+
+.live-status-badge.closed {
+  background-color: var(--color-closed-bg);
+  color: var(--color-closed-red);
+  border: 1px solid #fecaca;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.live-status-badge.open .status-dot {
+  background-color: var(--color-open-green);
+  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.25);
+  animation: pulseGreen 2s infinite;
+}
+
+.live-status-badge.closed .status-dot {
+  background-color: var(--color-closed-red);
+}
+
+@keyframes pulseGreen {
+  0% { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(21, 128, 61, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0); }
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+.hero-section {
+  padding: 40px 0 60px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 10% 20%, rgba(245, 158, 11, 0.06), transparent 50%),
+              radial-gradient(circle at 90% 80%, rgba(138, 59, 5, 0.05), transparent 50%);
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .hero-section {
+    padding: 70px 0 90px;
+  }
+  .hero-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 56px;
+  }
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.hero-tag {
+  background: #fdf2e4;
+  color: var(--color-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid #f9dfc1;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--color-primary-dark);
+  margin-bottom: 16px;
+}
+
+@media (min-width: 600px) {
+  .hero-title {
+    font-size: 3.2rem;
+  }
+}
+
+.hero-title span {
+  color: var(--color-primary);
+  font-style: italic;
+  display: inline-block;
+  position: relative;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+@media (min-width: 500px) {
+  .hero-cta-group {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Primary Button Styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 14px 26px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(138, 59, 5, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(138, 59, 5, 0.35);
+  color: #ffffff;
+}
+
+.btn-telegram-primary {
+  background: linear-gradient(135deg, var(--color-telegram), var(--color-telegram-dark));
+  color: #ffffff;
+  box-shadow: var(--shadow-telegram);
+  font-size: 1.05rem;
+}
+
+.btn-telegram-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(34, 158, 217, 0.45);
+  color: #ffffff;
+}
+
+.btn-outline {
+  background: #ffffff;
+  color: var(--color-primary-dark);
+  border: 1.5px solid var(--color-border);
+}
+
+.btn-outline:hover {
+  background: var(--color-cream-subtle);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* Hero Key Quick Info Chips */
+.hero-highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.highlight-item svg {
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* Hero Image Card */
+.hero-visual {
+  position: relative;
+}
+
+.hero-image-wrap {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 5px solid #ffffff;
+  background-color: var(--color-border-light);
+}
+
+.hero-image-wrap img {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+@media (min-width: 900px) {
+  .hero-image-wrap img {
+    height: 480px;
+  }
+}
+
+.hero-image-wrap:hover img {
+  transform: scale(1.03);
+}
+
+/* Floating badge over hero */
+.floating-cake-badge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(10px);
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.badge-text-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-primary-dark);
+}
+
+.badge-text-sub {
+  font-size: 0.78rem;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.badge-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: #fbf0e2;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   Quick Info Strip (Hours, Map, Telegram)
+   ========================================================================== */
+.quick-info-strip {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  margin-top: -30px;
+  position: relative;
+  z-index: 20;
+  border: 1px solid var(--color-border);
+}
+
+.info-strip-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .info-strip-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+.strip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.strip-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: #fcf3e8;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.strip-icon.telegram-icon-bg {
+  background: #e1f3fc;
+  color: var(--color-telegram);
+}
+
+.strip-heading {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-light);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.strip-detail {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.3;
+}
+
+.strip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.strip-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Section Headers
+   ========================================================================== */
+.section {
+  padding: 60px 0;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 44px;
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+@media (min-width: 600px) {
+  .section-title {
+    font-size: 2.4rem;
+  }
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+}
+
+/* ==========================================================================
+   Cakes Grid & Cake Cards
+   ========================================================================== */
+.cakes-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+@media (min-width: 640px) {
+  .cakes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .cakes-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+}
+
+.cake-card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.cake-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: #e5cdb8;
+}
+
+.cake-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background-color: var(--color-border-light);
+}
+
+.cake-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.cake-card:hover .cake-card-img-wrap img {
+  transform: scale(1.05);
+}
+
+.cake-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(43, 29, 20, 0.85);
+  color: #ffffff;
+  backdrop-filter: blur(8px);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  z-index: 2;
+}
+
+.cake-badge.bestseller {
+  background: var(--color-accent);
+}
+
+.cake-badge.signature {
+  background: var(--color-primary);
+}
+
+.cake-card-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cake-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.cake-category {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cake-servings {
+  font-size: 0.75rem;
+  color: var(--color-text-light);
+  font-weight: 500;
+}
+
+.cake-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.cake-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: 18px;
+  flex-grow: 1;
+}
+
+.cake-card-footer {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px dashed var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cake-price-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-label {
+  font-size: 0.7rem;
+  color: var(--color-text-light);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.price-amount {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1;
+}
+
+.price-sub {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+/* Telegram Action Button on Card */
+.btn-telegram-card {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0f9ff;
+  color: var(--color-telegram-dark);
+  border: 1px solid #bae6fd;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-telegram-card:hover {
+  background: var(--color-telegram);
+  color: #ffffff;
+  border-color: var(--color-telegram);
+  box-shadow: 0 4px 12px rgba(34, 158, 217, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Menu Filtering Tabs (cakes.html)
+   ========================================================================== */
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+
+.filter-btn {
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.filter-btn.active {
+  background: var(--color-primary);
+  color: #ffffff;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(138, 59, 5, 0.2);
+}
+
+/* ==========================================================================
+   Telegram Banner CTA
+   ========================================================================== */
+.telegram-banner {
+  background: linear-gradient(135deg, #1d3557, #0b1a2e);
+  border-radius: var(--radius-xl);
+  padding: 36px 24px;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  margin: 40px 0;
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 768px) {
+  .telegram-banner {
+    padding: 50px 44px;
+  }
+}
+
+.telegram-banner::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(34, 158, 217, 0.25), transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.telegram-banner-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+@media (min-width: 768px) {
+  .telegram-banner-grid {
+    grid-template-columns: 1.3fr 0.7fr;
+  }
+}
+
+.telegram-banner-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+@media (min-width: 600px) {
+  .telegram-banner-title {
+    font-size: 2.2rem;
+  }
+}
+
+.telegram-banner-desc {
+  font-size: 0.98rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+}
+
+.telegram-banner-action {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .telegram-banner-action {
+    align-items: flex-end;
+  }
+}
+
+/* ==========================================================================
+   About Page Styles (about.html)
+   ========================================================================== */
+.about-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .about-hero-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+}
+
+.about-text h2 {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--color-primary-dark);
+  margin-bottom: 20px;
+  line-height: 1.25;
+}
+
+.about-text p {
+  font-size: 1.02rem;
+  color: var(--color-text-muted);
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+@media (min-width: 600px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .values-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.value-card {
+  background: var(--color-card-bg);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.value-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fbf0e2;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin: 0 auto 16px;
+}
+
+.value-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+}
+
+.value-desc {
+  font-size: 0.88rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Hours & Location Styles (location.html)
+   ========================================================================== */
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+}
+
+@media (min-width: 900px) {
+  .location-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}
+
+.hours-card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+}
+
+.hours-list {
+  list-style: none;
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hours-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+}
+
+.hours-item.today {
+  background: #fdf3e7;
+  border-color: #f7d5b1;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.hours-day {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hours-item.today .hours-day::after {
+  content: 'Today';
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  background: var(--color-accent);
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.hours-time {
+  font-weight: 600;
+}
+
+.map-card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+}
+
+.map-embed-frame {
+  width: 100%;
+  height: 260px;
+  border: none;
+  background-color: #e5e7eb;
+}
+
+.map-card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.address-title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+.address-text {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.map-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   Order Guide & Telegram Builder (order.html)
+   ========================================================================== */
+.steps-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .steps-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step-card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-xl);
+  padding: 30px 24px;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  text-align: center;
+}
+
+.step-number {
+  width: 44px;
+  height: 44px;
+  background: var(--color-primary);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin: 0 auto 16px;
+  box-shadow: 0 4px 12px rgba(138, 59, 5, 0.25);
+}
+
+.step-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Interactive Order Builder Card */
+.order-builder-card {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  max-width: 680px;
+  margin: 0 auto 50px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin-bottom: 6px;
+}
+
+.form-select,
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-cream);
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--color-text-main);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-select:focus,
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--color-telegram);
+  box-shadow: 0 0 0 3px var(--color-telegram-glow);
+  background: #ffffff;
+}
+
+.order-preview-box {
+  background: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: var(--radius-md);
+  padding: 14px;
+  margin: 18px 0;
+  font-size: 0.88rem;
+  color: #334155;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+
+/* FAQ Accordion */
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faq-item {
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 18px 22px;
+  font-weight: 700;
+  font-size: 1.02rem;
+  color: var(--color-primary-dark);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  background: none;
+}
+
+.faq-answer {
+  display: none;
+  padding: 0 22px 18px;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+.faq-item.active .faq-chevron {
+  transform: rotate(180deg);
+}
+
+.faq-chevron {
+  transition: transform var(--transition-fast);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: #20130a;
+  color: #d1c5bc;
+  padding: 60px 0 30px;
+  font-size: 0.92rem;
+  border-top: 1px solid #362215;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+  }
+}
+
+.footer-brand h3 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.footer-brand p {
+  color: #a8978a;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.footer-col-title {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a:hover {
+  color: var(--color-accent-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid #362215;
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  color: #8a7a6e;
+  font-size: 0.82rem;
+}
+
+@media (min-width: 600px) {
+  .footer-bottom {
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+/* Floating Telegram Bubble (Desktop & Mobile) */
+.floating-telegram-fab {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--color-telegram), var(--color-telegram-dark));
+  color: #ffffff;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 0.95rem;
+  box-shadow: 0 10px 24px rgba(34, 158, 217, 0.45);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.floating-telegram-fab:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(34, 158, 217, 0.6);
+  color: #ffffff;
+}
+
+@media (max-width: 899px) {
+  .floating-telegram-fab {
+    display: none;
+  }
+}
