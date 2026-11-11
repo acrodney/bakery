@@ -74,11 +74,11 @@ function initMobileNav() {
 }
 
 /* ==========================================================================
-   Opening Hours & Live Status Indicator
+   Opening Hours & Live Status Indicator (Sunday Closed)
    ========================================================================== */
 const BAKERY_HOURS = {
-  // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
-  0: { dayName: 'Sunday', open: 9 * 60, close: 17 * 60, display: '9:00 AM – 5:00 PM' },
+  // 0 = Sunday (CLOSED), 1 = Monday, ..., 6 = Saturday
+  0: { dayName: 'Sunday', closed: true, display: 'Closed' },
   1: { dayName: 'Monday', open: 7 * 60 + 30, close: 19 * 60, display: '7:30 AM – 7:00 PM' },
   2: { dayName: 'Tuesday', open: 7 * 60 + 30, close: 19 * 60, display: '7:30 AM – 7:00 PM' },
   3: { dayName: 'Wednesday', open: 7 * 60 + 30, close: 19 * 60, display: '7:30 AM – 7:00 PM' },
@@ -102,7 +102,7 @@ function initOpeningHours() {
   const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
   const schedule = BAKERY_HOURS[currentDay];
-  const isOpen = currentMinutes >= schedule.open && currentMinutes < schedule.close;
+  const isOpen = !schedule.closed && currentMinutes >= schedule.open && currentMinutes < schedule.close;
 
   // Update all status badges
   const badges = document.querySelectorAll('.live-status-badge');
@@ -120,13 +120,16 @@ function initOpeningHours() {
     } else {
       badge.classList.remove('open');
       badge.classList.add('closed');
-      // Find next opening time
-      let nextOpenText = `Opens at ${formatMinutes(schedule.open)}`;
-      if (currentMinutes >= schedule.close) {
+      if (schedule.closed) {
+        textSpan.textContent = 'Closed Today (Sunday) • Opens Mon 7:30 AM';
+      } else if (currentMinutes < schedule.open) {
+        textSpan.textContent = `Closed Now • Opens at ${formatMinutes(schedule.open)}`;
+      } else {
         const tomorrow = (currentDay + 1) % 7;
-        nextOpenText = `Opens tomorrow at ${formatMinutes(BAKERY_HOURS[tomorrow].open)}`;
+        const tomorrowSchedule = BAKERY_HOURS[tomorrow];
+        const nextTime = tomorrowSchedule.closed ? 'Mon 7:30 AM' : `tomorrow ${formatMinutes(tomorrowSchedule.open)}`;
+        textSpan.textContent = `Closed Now • Opens ${nextTime}`;
       }
-      textSpan.textContent = `Closed Now • ${nextOpenText}`;
     }
     badge.appendChild(textSpan);
   });
